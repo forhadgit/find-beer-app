@@ -1,17 +1,37 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import {Button} from 'native-base';
+import React from 'react';
+import {Text} from 'react-native';
+import {createStackNavigator} from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
+import {Footer, FooterTab, Button, Icon} from 'native-base';
 
-class SearchTabNavigator extends Component {
-  render() {
-    return (
-      <View>
-        <Button block={true}>
-          <Text>Search</Text>
-        </Button>
-      </View>
-    );
-  }
-}
+import SearchTab from '../../Components/Search/tabNavigator/SearchTab';
+import FavouriteTab from '../../Components/Search/tabNavigator/FavouriteTab';
 
-export default SearchTabNavigator;
+const SearchTabNavigator = createStackNavigator(
+  {
+    SearchTab: {screen: SearchTab},
+    FavouriteTab: {screen: FavouriteTab},
+  },
+  {
+    tabBarPosition: 'bottom',
+    tabBarComponent: props => {
+      return (
+        <Footer>
+          <FooterTab>
+            <Button vertical>
+              <Icon name="beer"></Icon>
+              <Text>Search</Text>
+            </Button>
+
+            <Button vertical>
+              <Icon name="star"></Icon>
+              <Text>Favourite</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      );
+    },
+  },
+);
+
+export default createAppContainer(SearchTabNavigator);
