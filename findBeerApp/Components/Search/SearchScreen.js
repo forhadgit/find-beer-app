@@ -1,37 +1,36 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {createStackNavigator} from 'react-navigation-stack';
+import {Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
-import {Footer, FooterTab, Button, Icon} from 'native-base';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 import SearchTab from '../../Components/Search/tabNavigator/SearchTab';
 import FavouriteTab from '../../Components/Search/tabNavigator/FavouriteTab';
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Home!</Text>
+      </View>
+    );
+  }
+}
 
-const SearchTabNavigator = createStackNavigator(
-  {
-    SearchTab: {screen: SearchTab},
-    FavouriteTab: {screen: FavouriteTab},
-  },
-  {
-    tabBarPosition: 'bottom',
-    tabBarComponent: props => {
-      return (
-        <Footer>
-          <FooterTab>
-            <Button vertical>
-              <Icon name="beer"></Icon>
-              <Text>Search</Text>
-            </Button>
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Settings!</Text>
+      </View>
+    );
+  }
+}
 
-            <Button vertical>
-              <Icon name="star"></Icon>
-              <Text>Favourite</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      );
-    },
-  },
+const TabNavigator = createBottomTabNavigator({
+  Home: {screen: HomeScreen},
+  Settings: {screen: SettingsScreen},
+},
 );
 
-export default createAppContainer(SearchTabNavigator);
+export default createAppContainer(TabNavigator);
